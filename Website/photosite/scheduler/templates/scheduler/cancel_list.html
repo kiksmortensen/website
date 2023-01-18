@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Appointments</title>
+  </head>
+  <body>
+        {% if appointments %}
+            <ul>
+                {% for a in appointments %}
+                    <li><a href="{% url 'scheduler:view' a.id %}">{{a.name}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <p>No appointments were found with that email</p>
+        {% endif %}
+        <form action="{% url 'scheduler:cancel_list' %}" method="post">
+            {% csrf_token %}
+            <input type="email" placeholder="person@gmail.com" name="email" required="true">
+            <input type="submit" name="search" value="Search appointments">
+        </form>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{appointment}}'s appointment</title>
+  </head>
+  <body>
+    <h1>Appointment for {{appointment}}</h1>
+    <h2>Location: {{appointment.location}}</h2> 
+    <h2>Time: {{appointment.date}}</h2>
+    <h2>Email: {{appointment.email}}</h2>
+    <form action="{% url 'scheduler:cancel' appointment.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" name="cancel" value="cancel appointment">
+    </form>
+  </body>
+</html>

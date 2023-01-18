@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Appointments</title>
+  </head>
+  <body>
+    <h1>Schedule an Appointment</h1>
+    {% if error %}
+    <p>{{error}}</p>
+    {% endif %}
+    <form action="{% url 'scheduler:make' %}" method="post">
+      {% csrf_token %}
+      <input type="email" placeholder="person@gmail.com" value="{{ email }}" name="email" required="true">
+      <input type="text" placeholder="name" name="name" value="{{ name }}" required="true">
+      <input type="text" placeholder="location" name="location" value="{{ location }}" required="true">
+      <input type="datetime-local" name="date" required="true">
+      <input type="submit" name="schedule" value="schedule appointment">
+    </form>
+    <h1>Want to cancel an Appointment?</h1>
+    <form action="{% url 'scheduler:cancel_list' %}" method="post">
+      {% csrf_token %}
+      <input type="email" placeholder="person@gmail.com" name="email" required="true">
+      <input type="submit" name="search" value="Search appointments">
+    </form>
+  </body>
+</html>
